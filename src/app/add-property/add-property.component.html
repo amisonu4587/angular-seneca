@@ -1,0 +1,450 @@
+<div class="container">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="d-inline">Add New Property</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item">
+              <a routerLink="/seneca/home">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+              <a routerLink="/seneca/property">Property</a>
+            </li>
+            <li class="breadcrumb-item active">Add New Property</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()">
+    <div class="col-md-12">
+      <div class="row">
+          <h4 class="mb-4 mt-2 formSectionOwner">Property Record</h4>
+          <div class="col-md-3 col-sm-6 col-xs-12 genericFormItems">
+              <div class="form-group">
+                  <label for="txtPrecinct">Property Type</label>
+                  <select class="form-control form-control-sm text-sm rounded-0 shadow" formControlName="property_type" id="property_type">
+                      <option value="">Select Permit Type</option>
+                      <option value="legacy" property-number="L-52454-22">Legacy</option>
+                      <option value="routine_property" property-number="RP-52454-22">
+                          Routine Property
+                      </option>
+                      <option value="transfer_only_property" property-number="TP-52454-22">
+                          Transfer Only Property
+                      </option>
+                  </select>
+              </div>
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-12 genericFormItems">
+              <div class="form-group">
+                  <label for="txtApplicationDate">PropertyId</label>
+                  <input type="text" formControlName="property_id" id="property_id" class="form-control form-control-sm text-sm rounded-0 ui-autocomplete-input" placeholder="" autocomplete="off" />
+              </div>
+          </div>
+
+          <div class="col-md-6 col-sm-6 col-xs-12" id="choosePermitApplication">
+              <div class="form-group">
+                  <label for="selectPermitType">Routine</label>
+                  <div class="form-group clearfix">
+                      <div class="icheck-info d-inline mr-4">
+                          <input type="checkbox" formControlName="routine" value="" checked="" class="shadow" />&nbsp;
+                          <label for="routine" class="font-weight-normal text-uppercase">Routine / Is this property within 250' of a water body? </label>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="form-group">
+                  <label class="" for="is_foundation_designs_required">Which body of water? </label>
+                  <select class="form-control form-control-sm text-sm rounded-0 shadow" formControlName="body_of_water">
+                      <option value="">Select</option>
+                      <option value="Canal">Canal</option>
+                      <option value="Cayuga">Cayuga</option>
+                      <option value="Seneca">Seneca</option>
+                  </select>
+              </div>
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="form-group">
+                  <label class="" for="is_foundation_designs_required">Is the property occupied sesonally?</label>
+                  <select class="form-control form-control-sm text-sm rounded-0 shadow" formControlName="foundation_designs_req">
+                      <option value="">Select</option>
+                  </select>
+              </div>
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-12 genericFormItems">
+              <div class="form-group">
+                  <label for="txtIssuedDate">Other permitted facilities </label>
+                  <input type="text" formControlName="permited_facilities" class="form-control form-control-sm text-sm rounded-0" placeholder="Permitted Facilities" />
+              </div>
+          </div>
+      </div>
+      <hr>
+      <div class="row">
+        <h4 class="mb-4 mt-2 formSectionOwner">Record Status</h4>
+        <div class="row formSectionOwner">
+            <div class="col-md-3 col-sm-6 col-xs-12 genericFormItems">
+                <div class="form-group">
+                    <label for="txtPrecinct">Expired Status</label>
+                    <select class="form-control form-control-sm text-sm rounded-0 shadow" formControlName="expired_status">
+                        <option value="">Select</option>
+                        <option value="Expired">Expired</option>
+                        <option value="Upcoming">Upcoming</option>
+                        <option value="Not Due">Not Due</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6 col-xs-12 genericFormItems">
+                <div class="form-group">
+                    <label for="txtCensusTract">Inspection Due</label>
+                    <input type="text" formControlName="inspection_due" class="form-control form-control-sm text-sm rounded-0 dateField shadow" placeholder="" readonly="" />
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6 col-xs-12 genericFormItems">
+                <div class="form-group">
+                    <label for="txtCensusTract">Last Inspection</label>
+                    <input type="text" formControlName="last_inspection" class="form-control form-control-sm text-sm rounded-0 dateField shadow" placeholder="" readonly="" />
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="row">
+                    <div class="col-12" style="margin-top: 34px;">
+                        <div class="form-group">
+                            <div class="icheck-info d-inline">
+                                <input type="checkbox" formControlName="variance" value="" />&nbsp;
+                                <label for="variance" class="font-weight-bold text-uppercase">Variance</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6 col-xs-12 genericFormItems">
+                <div class="form-group">
+                    <label for="txtPrecinct">Property Record Status</label>
+                    <select class="form-control form-control-sm text-sm rounded-0 shadow" formControlName="property_record">
+                        <option value="">Select</option>
+                        <option value="Acitve">Acitve</option>
+                        <option value="Vacant">Vacant</option>
+                        <option value="Dormant">Dormant</option>
+                        <option value="Inactive">Inactive</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+      </div>
+      <hr />
+
+      <h4 class="mb-4 mt-2 formSectionOwner">Location Info</h4>
+
+      <div class="row formSectionOwner">
+          <div class="col-md-3 col-sm-6 col-xs-12 genericFormItems">
+              <div class="form-group">
+                  <label for="txtCensusTract">Tax ID / Tax Map</label>
+                  <input type="text" formControlName="tax_id" class="form-control form-control-sm text-sm rounded-0" placeholder="Tax ID" />
+              </div>
+          </div>
+
+          <div class="col-md-3 col-sm-6 col-xs-12 genericFormItems">
+              <div class="form-group">
+                  <label for="txtPrecinct">Town</label>
+                  <select class="form-control form-control-sm text-sm rounded-0 shadow" formControlName="town">
+                      <option value="">Select</option>
+                      <option value="Covert">COVERT</option>
+                      <option value="Fayette">FAYETTE</option>
+                      <option value="Junius">JUNIUS</option>
+                      <option value="Lodi">LODI</option>
+                      <option value="Ovid">OVID</option>
+                      <option value="Romulus">ROMULUS</option>
+                      <option value="Seneca Falls">SENECA FALLS</option>
+                      <option value="Tyre">TYRE</option>
+                      <option value="Varick">VARICK</option>
+                      <option value="Waterloo">WATERLOO</option>
+                  </select>
+              </div>
+          </div>
+
+          <div class="col-md-3 col-sm-6 col-xs-12 genericFormItems">
+              <div class="form-group">
+                  <label for="txtCensusTract">911 Address Number</label>
+                  <input type="text" formControlName="address_number_911" class="form-control form-control-sm text-sm rounded-0" placeholder="911 Address Number" />
+              </div>
+          </div>
+
+          <div class="col-md-3 col-sm-6 col-xs-12 genericFormItems">
+              <div class="form-group">
+                  <label for="txtCensusTract">911 Address Street</label>
+                  <input type="text" formControlName="address_street_911" class="form-control form-control-sm text-sm rounded-0" placeholder="911 Address Street" />
+              </div>
+          </div>
+
+          <div class="col-md-3 col-sm-6 col-xs-12 genericFormItems">
+              <div class="form-group">
+                  <label for="txtCensusTract">911 Address City</label>
+                  <input type="text" formControlName="address_city_911" class="form-control form-control-sm text-sm rounded-0" placeholder="911 Address City" />
+              </div>
+          </div>
+
+          <div class="col-md-3 col-sm-6 col-xs-12 genericFormItems">
+              <div class="form-group">
+                  <label for="txtCensusTract">911 Address State</label>
+                  <input type="text" formControlName="address_state_911" class="form-control form-control-sm text-sm rounded-0" placeholder="911 Address State" />
+              </div>
+          </div>
+
+          <div class="col-md-3 col-sm-6 col-xs-12 genericFormItems">
+              <div class="form-group">
+                  <label for="txtCensusTract">911 Address Zip</label>
+                  <input type="text" formControlName="address_zip_911" id="address_zip_911" class="form-control form-control-sm text-sm rounded-0" placeholder="911 Address Zip" data-inputmask='"mask": "99999"' data-mask="" im-insert="true" />
+              </div>
+          </div>
+      </div>
+      <hr>
+      <h4 class="mb-4 mt-2 formSectionOwner">Owner Info</h4>
+
+      <div class="row">
+          <div class="col-md-3 col-sm-6 col-xs-12 genericFormItems">
+              <div class="form-group">
+                  <label for="txtOwnerName">Owner Name</label>
+                  <!-- <input type="text" formControlName="owner_name" class="form-control form-control-sm text-sm rounded-0 ui-autocomplete-input" placeholder="Min 3 character to filter" autocomplete="off" /> -->
+                  <div class="ng-autocomplete">
+                    <ng-autocomplete
+                      [data]="data"
+                      [searchKeyword]="keyword"
+                      placeholder="Select Owner Name"
+                      (selected)='selectEvent($event)'
+                      (inputChanged)='onChangeSearch($event)'
+                      (inputFocused)='onFocused($event)'
+                      [itemTemplate]="itemTemplate"
+                      [notFoundTemplate]="notFoundTemplate">
+                    </ng-autocomplete>
+
+                    <ng-template #itemTemplate let-item>
+                    <a [innerHTML]="item.name"></a>
+                    </ng-template>
+
+                    <ng-template #notFoundTemplate let-notFound>
+                    <div [innerHTML]="notFound"></div>
+                    </ng-template>
+                    </div>
+
+                  <input type="hidden" formControlName="owner_id" value="" />
+              </div>
+          </div>
+
+          <div class="col-md-3 col-sm-6 col-xs-12 genericFormItems">
+              <div class="form-group">
+                  <label for="txtCensusTract">Mailing Address Line 1</label>
+                  <input type="text" formControlName="owner_mail_address1" class="form-control form-control-sm text-sm rounded-0" placeholder="Mailing Address Line 1" />
+              </div>
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-12 genericFormItems">
+              <div class="form-group">
+                  <label for="txtCensusTract">Mailing Address Line 2</label>
+                  <input type="text" formControlName="owner_mail_address2" class="form-control form-control-sm text-sm rounded-0" placeholder="Mailing Address Line 2" />
+              </div>
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-12 genericFormItems">
+              <div class="form-group">
+                  <label for="txtCensusTract">Mailing Address Line 3</label>
+                  <input type="text" formControlName="owner_mail_address3" class="form-control form-control-sm text-sm rounded-0" placeholder="Mailing Address Line 3" />
+              </div>
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-12 genericFormItems">
+              <div class="form-group">
+                  <label for="txtCensusTract">Owner Email Address</label>
+                  <input type="text" formControlName="owner_email" class="form-control form-control-sm text-sm rounded-0" placeholder="Owner Email Address" />
+              </div>
+          </div>
+
+          <div class="col-md-3 col-sm-6 col-xs-12 genericFormItems">
+              <div class="form-group">
+                  <label for="txtCensusTract">Owner Phone</label>
+                  <input type="text" formControlName="owner_phone" class="form-control form-control-sm text-sm rounded-0" placeholder="Owner Phone" data-inputmask='"mask": "(999) 999-9999"' data-mask="" im-insert="true" />
+              </div>
+          </div>
+
+          <div class="col-md-3 col-sm-6 col-xs-12 genericFormItems">
+              <div class="form-group">
+                  <label for="txtCensusTract">Owner Phone Extension</label>
+                  <input type="text" formControlName="owner_phone_extension" class="form-control form-control-sm text-sm rounded-0" placeholder="Owner Phone Extension" />
+              </div>
+          </div>
+      </div>
+
+      <hr />
+
+      <h4 class="mb-4 mt-2 formSectionOwner">System Info</h4>
+
+      <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12 genericFormItems">
+          <div class="form-group">
+              <label for="txtPrecinct">Septic System Type</label>
+              <select class="form-control form-control-sm text-sm rounded-0 shadow" formControlName="septic_system_type">
+                  <option value="">Select</option>
+                  <option value="Septic Tank with Absorption Trenches/Bed">
+                      Septic Tank with Absorption Trenches/Bed
+                  </option>
+                  <option value="Septic Tank with Seepage Pit (dry well)">
+                      Septic Tank with Seepage Pit (dry well)
+                  </option>
+                  <option value="Seepage Pit (without Septic Tank)">
+                      Seepage Pit (without Septic Tank)
+                  </option>
+                  <option value="Septic Tank with Sand Filter (surface discharge)">
+                      Septic Tank with Sand Filter (surface discharge)
+                  </option>
+                  <option value="Septic Tank with Sand Filter (subsurface discharge)">
+                      Septic Tank with Sand Filter (subsurface discharge)
+                  </option>
+                  <option value="Holding Tank">Holding Tank</option>
+                  <option value="Privy">Privy</option>
+                  <option value="Composting Toilet">
+                      Composting Toilet
+                  </option>
+                  <option value="Unknown">Unknown</option>
+              </select>
+          </div>
+      </div>
+      <div class="col-md-3 col-sm-6 col-xs-12 genericFormItems">
+        <div class="form-group">
+            <label for="txtCensusTract">Date of Construction</label>
+            <input type="text" formControlName="construction_date" class="form-control form-control-sm text-sm rounded-0 dateField shadow" placeholder="" readonly="" />
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 col-xs-12 genericFormItems">
+        <div class="form-group">
+            <label for="txtCensusTract">Date of Last Modification</label>
+            <input type="text" formControlName="modification_date" class="form-control form-control-sm text-sm rounded-0 dateField shadow" placeholder="" readonly="" />
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 col-xs-12 genericFormItems">
+        <div class="form-group">
+            <label for="txtPrecinct">Is there a plan on file?</label>
+            <select class="form-control form-control-sm text-sm rounded-0 shadow" formControlName="plan_on_file">
+                <option value="">Select</option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+            </select>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 col-xs-12 genericFormItems">
+        <div class="form-group">
+            <label for="txtPrecinct">Water Supply Type</label>
+            <select class="form-control form-control-sm text-sm rounded-0 shadow" formControlName="water_supply_type">
+                <option value="">Select</option>
+                <option value="Public">Public</option>
+                <option value="Lake">Lake</option>
+                <option value="Dug Well">Dug Well</option>
+                <option value="Drilled Well">Drilled Well</option>
+                <option value="Creek">Creek</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-6 col-xs-12 genericFormItems">
+        <div class="form-group">
+            <label for="txtCensusTract">Other description</label>
+            <input type="text" formControlName="other_description" class="form-control form-control-sm text-sm rounded-0" placeholder="Other description" />
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-6 col-xs-12 genericFormItems">
+        <div class="form-group">
+            <label for="txtCensusTract">Distance to Nearest Well</label>
+            <input type="text" formControlName="distance_to_nearest_well" class="form-control form-control-sm text-sm rounded-0" placeholder="Distance to Nearest Well" />
+        </div>
+      </div>
+
+
+      </div>
+
+
+      <hr>
+
+      <div class="row">
+        <h4 class="mb-4 mt-2 formSectionOwner">Tank Info</h4>
+        <div class="col-sm-6 col-xs-12 tank_col" formArrayName="tanks">
+            <div class="row tank_row" *ngFor="let tank of tanks().controls; let i = index" [formGroupName]="i">
+                <div class="col-10 tank">
+                    <div class="form-group">
+                        <label class="">Tank {{ i + 1 }}</label>
+                        <input type="text" class="form-control form-control-sm text-sm rounded-0 shadow" formControlName="tank_name" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-2 mt-4">
+                    <div class="form-group">
+                        <button (click)="removeTank(i)" class="btn btn-danger" style="margin-top: 9px;">
+                            Remove
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row add_new_tank_row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <button type="button" class="btn btn-app btn-flat mb-1 p-2 elevation-2 text-bold ml-0" (click)="addTank()"><i class="fas fa-plus-circle"></i>Add New Tank</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+      <hr>
+
+
+
+
+      <div class="row">
+        <h4 class="mb-4 mt-2 formSectionOwner">Note Info</h4>
+        <div class="col-sm-6 col-xs-12 note_col" formArrayName="notes">
+            <div class="row note_row" *ngFor="let note of notes().controls; let n = index" [formGroupName]="n">
+                <div class="col-10 note">
+                    <div class="form-group">
+                        <label class="">Note {{ n + 1 }}</label>
+                        <input type="text" class="form-control form-control-sm text-sm rounded-0 shadow" formControlName="note" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-2 mt-4">
+                    <div class="form-group">
+                        <button (click)="removeNote(n)" class="btn btn-danger" style="margin-top: 9px;">
+                            Remove
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row add_new_note_row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <button type="button" class="btn btn-app btn-flat mb-1 p-2 elevation-2 text-bold ml-0" (click)="addNote()"><i class="fas fa-plus-circle"></i>Add New Note</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+      <hr>
+
+
+
+
+
+    </div>
+
+
+
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+
+  <br />
+  {{ this.propertyForm.value | json }}
+</div>

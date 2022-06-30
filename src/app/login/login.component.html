@@ -1,0 +1,66 @@
+<div class="login-page" style="min-height: 466px !important;">
+  <div class="login-box">
+    <!-- /.login-logo -->
+    <div class="card card-outline card-primary">
+      <div class="card-header text-center">
+        <a href="" class="h1"><b>Admin</b>LTE</a>
+      </div>
+      <div class="card-body">
+        <p class="login-box-msg">Sign in to start your session</p>
+
+        <form [formGroup]="login" (ngSubmit)="Login()">
+          <div class="input-group mb-3">
+            <input type="email" class="form-control" placeholder="Email" formControlName="email">
+
+            <div class="input-group-append">
+              <div class="input-group-text" style="height: 100%;">
+                <span class="fa fa-envelope"></span>
+              </div>
+            </div>
+          </div>
+        <span class="error" *ngIf="all['email'].invalid && all['email'].touched">Email Field is required</span>
+
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" placeholder="Password" formControlName="password">
+
+            <div class="input-group-append">
+              <div class="input-group-text" style="height: 100%;">
+                <span class="fa fa-lock"></span>
+              </div>
+            </div>
+
+          </div>
+          <span class="error" *ngIf="all['password'].invalid && all['password'].touched">Password Field is required</span>
+
+          <div class="row">
+            <div class="col-8">
+              <!-- <div class="icheck-primary">
+                <input type="checkbox" id="remember">
+                <label for="remember">
+                  Remember Me
+                </label>
+              </div> -->
+            </div>
+            <!-- /.col -->
+            <div class="col-4">
+
+              <button type="submit"  [disabled]="login.invalid" class="btn btn-primary btn-block">Sign In </button>
+            </div>
+            <!-- /.col -->
+          </div>
+        </form>
+
+
+        <!-- /.social-auth-links -->
+
+
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+  </div>
+  <!-- /.login-box -->
+
+
+
+</div>
