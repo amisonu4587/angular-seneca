@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl,FormGroup,Validators,FormBuilder,FormArray} from '@angular/forms';
 import { OwnerService } from '../owner.service';
+import { PropertyService } from '../property.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-property',
@@ -13,7 +15,7 @@ export class AddPropertyComponent {
   propertyForm: FormGroup;
 
 
-  constructor(private fb:FormBuilder, private owner:OwnerService) {
+  constructor(private fb:FormBuilder, private owner:OwnerService, private property:PropertyService, private router:Router) {
 
     this.propertyForm = this.fb.group({
       property_type: new FormControl('', Validators.required),
@@ -38,14 +40,14 @@ export class AddPropertyComponent {
       address_state_911: new FormControl('', Validators.required),
       address_zip_911: new FormControl('', Validators.required),
 
-      owner_name: new FormControl('', Validators.required),
-      owner_id: new FormControl('', Validators.required),
-      owner_mail_address1: new FormControl('', Validators.required),
-      owner_mail_address2: new FormControl('', Validators.required),
-      owner_mail_address3: new FormControl('', Validators.required),
-      owner_email: new FormControl('', Validators.required),
-      owner_phone: new FormControl('', Validators.required),
-      owner_phone_extension: new FormControl('', Validators.required),
+      owner_name: new FormControl(''),
+      owner_id: new FormControl(''),
+      owner_mail_address1: new FormControl(''),
+      owner_mail_address2: new FormControl(''),
+      owner_mail_address3: new FormControl(''),
+      owner_email: new FormControl(''),
+      owner_phone: new FormControl(''),
+      owner_phone_extension: new FormControl(''),
 
 
       septic_system_type: new FormControl('', Validators.required),
@@ -71,6 +73,8 @@ export class AddPropertyComponent {
   newTank(): FormGroup {
     return this.fb.group({
       tank_name: '',
+       data_id: '',
+
     })
   }
 
@@ -92,6 +96,7 @@ export class AddPropertyComponent {
   newNote(): FormGroup {
     return this.fb.group({
       note: '',
+      data_id: '',
     })
   }
 
@@ -104,29 +109,29 @@ export class AddPropertyComponent {
   }
 
 
-  onSubmit() {
-    console.log(this.propertyForm.value);
-  }
 
-  keyword = 'name';
+
+    keyword = 'name';
     data: any;
     selectEvent(item:any) {
       // do something with selected item
        console.log(item.id);
        this.propertyForm.patchValue({
-        owner_id: item.id,
-        owner_mail_address1: item.address1,
-        owner_mail_address2: item.address2,
-        owner_mail_address3: item.address3,
-        owner_email: item.email,
-        owner_phone: item.phone,
-        owner_phone_extension: item.phone_extension
+            owner_name: item.name,
+            owner_id: item.id,
+            owner_mail_address1: item.address1,
+            owner_mail_address2: item.address2,
+            owner_mail_address3: item.address3,
+            owner_email: item.email,
+            owner_phone: item.phone,
+            owner_phone_extension: item.phone_extension
       });
     }
 
     onChangeSearch(val: string) {
       this.propertyForm.patchValue({
         owner_id: '',
+        owner_name: val,
         owner_mail_address1: '',
         owner_mail_address2:'',
         owner_mail_address3:'',
@@ -139,20 +144,30 @@ export class AddPropertyComponent {
     }
 
     onFocused(e:any){
+      console.log(e);
       // do something when input is focused
     }
 
   ngOnInit(){
     this.tanks().push(this.newTank());
+
     this.notes().push(this.newNote());
 
     this.owner.getowner().subscribe((result:any)=>{
-    this.data=result.data;
+        this.data=result.data;
     })
 
   }
 
+  dateChanged($event:any){
+// console.log($event.target.value)
+  }
 
-
+  onSubmit(){
+     this.property.saveproperty(this.propertyForm.value).subscribe((result)=>{
+     this.propertyForm.reset({});
+     this.router.navigate(['seneca/property']);
+     })
+   }
 
 }

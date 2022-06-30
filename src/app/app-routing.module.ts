@@ -7,6 +7,7 @@ import {HeaderComponent} from './header/header.component';
 import {PropertyComponent} from './property/property.component';
 import {AddPropertyComponent} from './add-property/add-property.component'
 import { AuthGuard } from './auth.guard';
+import {PropertyResolver} from './property.resolver'
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -18,7 +19,7 @@ const routes: Routes = [
     children: [
       { path: 'home', component: HomeComponent },
       { path: 'about', component: AboutComponent },
-      { path: 'property', component: PropertyComponent },
+      { path: 'property', component: PropertyComponent,resolve: { message: PropertyResolver } },
       { path: 'add-property', component: AddPropertyComponent },
     ]
   },
