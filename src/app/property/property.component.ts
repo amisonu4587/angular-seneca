@@ -18,6 +18,17 @@ export class PropertyComponent implements OnInit {
     })
   }
 
+  deleteProperty(item:any){
+
+      this.property.deleteproperty(item).subscribe((result)=>{
+      this.ngOnInit();
+      })
+
+
+  }
 
 
 }
+
+
+

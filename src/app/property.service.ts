@@ -13,4 +13,8 @@ export class PropertyService {
   saveproperty(data:any){
     return this.http.post('http://localhost:8000/api/property-add',data)
   }
+
+  deleteproperty(id:any){
+    return this.http.delete(`http://localhost:8000/api/property-delete/${id}`)
+  }
 }
