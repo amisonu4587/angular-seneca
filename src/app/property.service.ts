@@ -17,4 +17,7 @@ export class PropertyService {
   deleteproperty(id:any){
     return this.http.delete(`http://localhost:8000/api/property-delete/${id}`)
   }
+  getcurrrentProperty(id:any){
+    return this.http.get(`http://localhost:8000/api/property-edit/${id}`)
+  }
 }

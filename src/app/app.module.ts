@@ -18,6 +18,7 @@ import {MatInputModule} from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { EditPropertyComponent } from './edit-property/edit-property.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     HomeComponent,
     AboutComponent,
     PropertyComponent,
-    AddPropertyComponent
+    AddPropertyComponent,
+    EditPropertyComponent
   ],
   imports: [
     BrowserModule,

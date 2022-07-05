@@ -6,6 +6,7 @@ import {AboutComponent} from './about/about.component';
 import {HeaderComponent} from './header/header.component';
 import {PropertyComponent} from './property/property.component';
 import {AddPropertyComponent} from './add-property/add-property.component'
+import { EditPropertyComponent } from './edit-property/edit-property.component';
 import { AuthGuard } from './auth.guard';
 import {PropertyResolver} from './property.resolver'
 
@@ -21,6 +22,8 @@ const routes: Routes = [
       { path: 'about', component: AboutComponent },
       { path: 'property', component: PropertyComponent,resolve: { message: PropertyResolver } },
       { path: 'add-property', component: AddPropertyComponent },
+      { path: 'edit-property/:id', component: EditPropertyComponent },
+
     ]
   },
   { path: '**', redirectTo: '/login', pathMatch: 'full' },

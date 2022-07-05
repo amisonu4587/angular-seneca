@@ -72,7 +72,11 @@
                                               <td>{{ item.property_record }}</td>
                                               <td>{{ item.tax_id }}</td>
                                               <td>{{ item.address_street_911 }}</td>
-                                              <td><i class="fa fa-trash-o" (click)="deleteProperty(item.id)" style="color:red;"></i></td>
+                                              <td><i class="fa fa-trash-o" (click)="deleteProperty(item.id)" style="color:red;"></i>
+
+                                              <a routerLink="/seneca/edit-property/{{ item.id }}"><i class="fa fa-edit" style="color:blue;"></i></a>
+
+                                              </td>
 
                                           </tr>
 
