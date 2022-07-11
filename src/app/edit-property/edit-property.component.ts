@@ -140,8 +140,7 @@ export class EditPropertyComponent implements OnInit {
 
 
   ngOnInit(): void {
-
-    this.tanks().push(this.newTank());
+    // this.tanks().push(this.newTank());
 
     this.notes().push(this.newNote());
 
@@ -150,6 +149,9 @@ export class EditPropertyComponent implements OnInit {
     })
 
     this.property.getcurrrentProperty(this.router.snapshot.params['id']).subscribe((res:any)=>{
+          //this.tanks().push(this.newTank());
+          // const fields=res.data[0].note;
+          // console.log(fields);
           this.propertyForm = this.fb.group({
           property_type: new FormControl(res.data[0].property_type),
           property_id: new FormControl(res.data[0].property_id),
@@ -210,6 +212,13 @@ export class EditPropertyComponent implements OnInit {
 
   onSubmit(){
     console.log('fghg');
+  }
+
+  collection(){
+
+    this.property.updateCurrentProperty(this.router.snapshot.params['id'],this.propertyForm.value).subscribe((result)=>{
+    console.log(result);
+    })
   }
 
 }

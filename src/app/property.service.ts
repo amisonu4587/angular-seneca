@@ -20,4 +20,8 @@ export class PropertyService {
   getcurrrentProperty(id:any){
     return this.http.get(`http://localhost:8000/api/property-edit/${id}`)
   }
+  updateCurrentProperty(id:any,data:any){
+    return this.http.put(`http://localhost:8000/api/property-update/${id}`,data)
+
+  }
 }

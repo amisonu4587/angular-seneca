@@ -20,7 +20,7 @@
     </div>
   </section>
 
-  <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="propertyForm" (ngSubmit)="collection()">
     <div class="col-md-12">
       <div class="row">
           <h4 class="mb-4 mt-2 formSectionOwner">Property Record</h4>
@@ -403,6 +403,7 @@
 
       <hr>
 
+
       <div class="row">
         <h4 class="mb-4 mt-2 formSectionOwner">Tank Info</h4>
         <div class="col-sm-6 col-xs-12 tank_col" formArrayName="tanks">
@@ -434,42 +435,6 @@
     </div>
 
       <hr>
-
-
-
-
-      <div class="row">
-        <h4 class="mb-4 mt-2 formSectionOwner">Note Info</h4>
-        <div class="col-sm-6 col-xs-12 note_col" formArrayName="notes">
-            <div class="row note_row" *ngFor="let note of notes().controls; let n = index" [formGroupName]="n">
-                <div class="col-10 note">
-                    <div class="form-group">
-                        <label class="">Note {{ n + 1 }}</label>
-                        <input type="text" class="form-control form-control-sm text-sm rounded-0 shadow" formControlName="note" class="form-control" />
-                        <input type="hidden"  formControlName="data_id" [ngModel]="n + 1"  class="form-control" />
-
-                      </div>
-                </div>
-                <div class="col-2 mt-4">
-                    <div class="form-group">
-                        <button (click)="removeNote(n)" class="btn btn-danger" style="margin-top: 9px;">
-                            Remove
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="row add_new_note_row">
-                <div class="col-12">
-                    <div class="form-group">
-                        <button type="button" class="btn btn-app btn-flat mb-1 p-2 elevation-2 text-bold ml-0" (click)="addNote()"><i class="fas fa-plus-circle"></i>Add New Note</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-      <hr>
-
 
 
 
