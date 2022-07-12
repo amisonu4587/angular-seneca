@@ -198,6 +198,8 @@ export class EditPropertyComponent implements OnInit {
           tanks: this.fb.array([]) ,
           notes: this.fb.array([]) ,
       });
+      this.setDefaultData(res.data[0].tank);
+
     })
 
 
@@ -205,14 +207,28 @@ export class EditPropertyComponent implements OnInit {
 
 
   }
+
+  setDefaultData(data:any){
+   console.log(data);
+  }
+
+  employeeSkills(data: any): FormArray {
+    return this.tanks()
+      .at(data)
+      .get('tank_name') as FormArray;
+  }
+
+
+
+
   dateChanged($event:any){
     // console.log($event.target.value)
       }
 
 
-  onSubmit(){
-    console.log('fghg');
-  }
+  // onSubmit(){
+  //   console.log('fghg');
+  // }
 
   collection(){
 
