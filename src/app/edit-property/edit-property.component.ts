@@ -1,8 +1,11 @@
+import { PropertyData } from './../model/property.model';
 import { Component, OnInit } from '@angular/core';
 import { PropertyService } from '../property.service';
 import {FormControl,FormGroup,Validators,FormBuilder,FormArray} from '@angular/forms';
 import { Router,ActivatedRoute } from '@angular/router';
-import { OwnerService } from '../owner.service'
+import { OwnerService } from '../owner.service';
+import { map } from 'rxjs/operators';
+
 @Component({
   selector: 'app-edit-property',
   templateUrl: './edit-property.component.html',
@@ -10,7 +13,12 @@ import { OwnerService } from '../owner.service'
 })
 export class EditPropertyComponent implements OnInit {
   propertyForm: FormGroup;
-  constructor(private property:PropertyService, private router: ActivatedRoute, private fb:FormBuilder, private owner:OwnerService,) {
+
+  public propertyData : PropertyData;
+
+  pID:number;
+
+  constructor(private property:PropertyService, private router: ActivatedRoute, private fb:FormBuilder, private owner:OwnerService) {
 
     this.propertyForm = this.fb.group({
       property_type: new FormControl('', Validators.required),
@@ -141,17 +149,32 @@ export class EditPropertyComponent implements OnInit {
 
   ngOnInit(): void {
     // this.tanks().push(this.newTank());
-
+    this.pID = this.router.snapshot.params['id'];
     this.notes().push(this.newNote());
 
     this.owner.getowner().subscribe((result:any)=>{
         this.data = result.data;
     })
 
-    this.property.getcurrrentProperty(this.router.snapshot.params['id']).subscribe((res:any)=>{
+    //this.property.getcurrrentProperty(this.pID).subscribe((res:PropertyData)=>console.log(res.data));
+
+    const properties$ = this.property.getcurrrentProperty(this.pID).pipe(
+      map((res):PropertyData => {
+        this.propertyData = new PropertyData();
+        this.propertyData.id = res.data.id;
+        return this.propertyData;
+      })
+    );
+
+    properties$.subscribe(res=>console.log(res));
+
+
+    this.property.getcurrrentProperty(this.pID).subscribe((res:any)=>{
           //this.tanks().push(this.newTank());
           // const fields=res.data[0].note;
           // console.log(fields);
+
+
           this.propertyForm = this.fb.group({
           property_type: new FormControl(res.data[0].property_type),
           property_id: new FormControl(res.data[0].property_id),

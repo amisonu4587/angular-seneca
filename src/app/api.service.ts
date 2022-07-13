@@ -8,7 +8,12 @@ export class ApiService {
 
   constructor(private http:HttpClient) { }
 
-  post(url:string,body:string){
-    return this.http.post(url,body)
+  public post(apiUrl:string,body:string){
+    return this.http.post(apiUrl,body)
+  }
+
+
+  get(url:string){
+    return this.http.get(url)
   }
 }
